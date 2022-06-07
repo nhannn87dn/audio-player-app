@@ -1,38 +1,282 @@
-.App {
-  text-align: center;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  outline: none;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body, html {
+  font-family: 'Nunito', sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+body {
+  background-color: #e8e8e8;
+  color: #44566C;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1;
   min-height: 100vh;
+  overflow-x: hidden;
+  -ms-overflow-style: scrollbar;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Nunito", sans-serif;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.main_container {
+  max-width: 1200px;
+  margin: 30px auto;
+}
+.layout_wrapper {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
+}
+.layout_left {
+  flex-basis: 60%;
+  margin-right: 30px;
+}
+.layout_right {
+  flex: 1;
+}
+
+.playing_box {
+  background-color: #fafafa;
+  border-radius: 20px;
+  padding: 20px;
+  min-height: 400px;
+}
+.playing_title, .audios__list_title {
+  font-size: 30px;
+  display: block;
+  text-align: center;
+  margin-bottom: 20px;
+
+}
+.audios__list_title {
+  text-align: left;
+ 
+}
+.playing_now {
+  background-color: #fff;
+  border-radius: 10px;
+  min-height: 300px;
+  margin: 30px auto;
+  padding: 30px 0;
+}
+
+.playing_cover {
+  height: 20em;
+  width: 20em;
+  border-radius: 20em;
+  overflow: hidden;
+  margin: 0 auto;
+  background-position: 50% 50%!important;
+  background-size: cover!important;
+  position: relative;
+  
+}
+.playing_cover_disc {
+  display: block;
+  width: 60px;
+  height: 60px;
+  border-radius: 60px;
+  background-color: #fff;
+  z-index: 2;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.playing_info {
+  text-align: center;
+  margin: 20px auto;
+}
+.playing_info_singname {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.playing_controls {
+  display: flex;
+  justify-content: space-around;
+ 
+}
+.playing_controls>div{
+  flex-basis: 40px;
+  display: flex;
+  height: 40px;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+   align-content: center;
+   float: left;
+   font-size: 20px;
+   cursor: pointer;
+   
+}
+.playing_controls>div>*{
+  vertical-align: middle;
+  margin-top: 10px;
+}
+ div.controls_playpause{
+  background-color: #4834d4;
+  border-radius: 60px;
 }
 
-.App-link {
-  color: #61dafb;
+.audios__list {
+  list-style: none;
+}
+.audios__item {
+  background-color: #fff;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 10px;
+  display: flex;
+  justify-content: flex-start;
+}
+.audios__item span{
+  display: block;
+  align-self: center;
+  float: left;
+}
+.audios__item_id {
+  flex-basis: 5%;
+  color: #888;
+}
+.audios__item_thumb {
+  flex-basis: 10%;
+}
+.audios__item_name {
+  flex: 1;
+  cursor: pointer;
+  font-weight: 700;
+}
+.audios__item_artist {
+  flex-basis: 30%;
+  color: #888;
+}
+.audios__item_time {
+  flex-basis: 10%;
+  color: #888;
+}
+.audios__item_like {
+  flex-basis: 5%;
+  justify-self: end;
+}
+.audios__item_like svg{
+  cursor: pointer;
 }
 
-@keyframes App-logo-spin {
+.playing_timeline {
+  padding: 0 20px;
+}
+.timeline_status {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #888;
+}
+.timeline_duration {
+  float: right;
+}
+
+
+.rotate {
+  animation: rotation 8s infinite linear;
+}
+
+@keyframes rotation {
   from {
     transform: rotate(0deg);
   }
   to {
-    transform: rotate(360deg);
+    transform: rotate(359deg);
   }
+}
+
+.eq-bar {
+  transform: scale(1, -1) translate(0, -24px);
+}
+
+.eq-bar--1 {
+  animation-name: short-eq;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
+  animation-delay: 0s;
+  fill: #4834d4;
+}
+
+.eq-bar--1 {
+  animation-name: short-eq;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
+  animation-delay: 0s;
+  fill: #4834d4;
+}
+
+.eq-bar--2 {
+  animation-name: tall-eq;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
+  animation-delay: 0.17s;
+  fill: #4834d4;
+}
+
+.eq-bar--3 {
+  animation-name: short-eq;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
+  animation-delay: 0.34s;
+  fill:#4834d4;
+}
+
+@keyframes short-eq {
+  0% {
+    height: 8px
+  }
+
+  50% {
+    height: 4px
+  }
+
+  100% {
+    height: 8px
+  }
+}
+
+@keyframes tall-eq {
+  0% {
+    height: 16px
+  }
+
+  50% {
+    height: 6px
+  }
+
+  100% {
+    height: 16px
+  }
+}
+
+@media (max-width: 800px) {
+  .layout_wrapper {
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 20px;
+  }
+  .layout_left, .layout_right {
+      flex: 1;
+  }
+  .layout_left {
+      margin-right: 0;
+     
+      order: 2;
+  }
+  .layout_right{
+    order: 1;
+    margin-bottom: 20px;
+  }
+  
 }
