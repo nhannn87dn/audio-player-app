@@ -1,0 +1,50 @@
+
+.audios__list {
+    list-style: none;
+  }
+  .audios__item {
+    background-color: #fff;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-start;
+  }
+  .audios__item span{
+    display: block;
+    align-self: center;
+    float: left;
+  }
+  .audios__item_id {
+    flex-basis: 5%;
+    color: #888;
+  }
+  .audios__item_thumb {
+    flex-basis: 10%;
+  }
+  .audios__item_thumb img{
+      border-radius: 5px;
+  }
+  .audios__item_name {
+    flex: 1;
+    cursor: pointer;
+    font-weight: 700;
+  }
+  .audios__item_artist {
+    flex-basis: 30%;
+    color: #888;
+    font-size: 13px;
+  }
+  .audios__item_time {
+    flex-basis: 10%;
+    color: #888;
+    font-size: 13px;
+  }
+  .audios__item_like {
+    flex-basis: 5%;
+    justify-self: end;
+  }
+  .audios__item_like svg{
+    cursor: pointer;
+  }
+  

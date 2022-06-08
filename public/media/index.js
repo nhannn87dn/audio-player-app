@@ -1,14 +1,5 @@
-import AnhSaoVaBauTroi from "./AnhSaoVaBauTroi.mp3";
-import AnhSaoVaBauTroiCover from "./cover.jpg";
-import DeVuong from "./DeVuong.mp3";
-import DeVuongCover from "./cover-2.jpg";
-import TungThuong from "./TungThuong.mp3";
-import TungThuongCover from "./cover-3.jpg";
-import YeuEmHonMoiNgay from "./YeuEmHonMoiNgay.mp3";
-import YeuEmHonMoiNgayCover from "./cover-4.jpg";
 
-
-const audios = [
+export default  audios = [
   {
     src: AnhSaoVaBauTroi,
     title: "Ánh sao và bầu trời",
@@ -39,4 +30,3 @@ const audios = [
   }
 ];
 
-export default audios;

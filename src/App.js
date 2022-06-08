@@ -1,61 +1,58 @@
 import React, { useState, useRef } from "react";
-import TimeSlider from "react-input-slider";
-//import 'normalize.css';
-import './App.css';
-import {IoMdHeart, IoIosShuffle,IoIosSkipBackward, IoIosPlay, IoIosPause, IoIosSkipForward, IoIosRepeat } from 'react-icons/io';
-import audios from './media'; 
 
 
-
-function AudioItem({id, cover, name, artist, time, handle, isPlay}){
-  const [like, setLike] = useState(false);
-  const handleLike = () => {
-    setLike(!like);
-  }
-
-  let activeLike = like ? "#ff867e" : '#888';
-
-  return (
-    <li className="audios__item" >
-      <span className="audios__item_id">{isPlay ? (<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" color="#4834d4" viewBox="0 0 24 24">
-  <rect className="eq-bar eq-bar--1" x="4" y="4" width="3.7" height="8"/>
-  <rect className="eq-bar eq-bar--2" x="10.2" y="4" width="3.7" height="16"/>
-  <rect className="eq-bar eq-bar--3" x="16.3" y="4" width="3.7" height="11"/>
-</svg>) : id}</span>
-      <span className="audios__item_thumb"><img src={cover} height={50} alt="{name}" /></span>
-      <span className="audios__item_name" onClick={handle}>{name}</span>
-      <span className="audios__item_artist">{artist}</span>
-      <span className="audios__item_time">{time}</span>
-      <span className="audios__item_like"><IoMdHeart onClick={handleLike} color={activeLike} /></span>
-  </li>
-  )
-}
+import "./App.css";
+import { audios } from "./Data";
+import Controls from "./components/Controls";
+import SliderTime from "./components/SliderTime";
+import CoverDisc from "./components/CoverDisc";
+import AlbumInfo from "./components/AlbumInfo";
+import PlayList from "./components/PlayLists";
 
 function App() {
-
   const audioRef = useRef();
   const [audioIndex, setAudioIndex] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isPlay, setPlay] = useState(false);
-
+  const [isRepeat, setRepeat] = useState(true);
+  const [isShuffer, setShuffer] = useState(false);
 
   const total = audios.length;
 
-  const handleLoadedData = () => {
-    setDuration(audioRef.current.duration);
-    if (isPlay) audioRef.current.play();
-  };
-
-  const handlePausePlayClick = () => {
-    if (isPlay) {
-      audioRef.current.pause();
-    } else {
-      audioRef.current.play();
+  /* sự kiện click các button controls */
+  const handleControls = (action)=> {
+    switch(action) {
+      case 'play':
+            audioRef.current.play();
+            setPlay(true);
+        break;
+      case 'pause':
+          audioRef.current.pause();
+          setPlay(false);
+        break;
+      case 'next':
+          setAudioIndex((audioIndex + 1) % total);
+        break;
+      case 'previous':
+          setAudioIndex((audioIndex - 1) % total);
+        break;
+      case 'repeat':
+          console.log('repeat');
+          setRepeat(!isRepeat);
+          /* trộn bài luôn tắt khi repeat false */
+          setShuffer(!isRepeat ? false: false);
+        break;
+      case 'shuffer':
+          /* trộn bài cho phép tắt bật khi repeat true */
+          setShuffer(isRepeat ? !isShuffer : false);
+        break;
+      default:
+        
     }
-    setPlay(!isPlay);
-  };
+  }
 
+  /* Kéo thanh time thì cập nhật */
   const handleTimeSliderChange = ({ x }) => {
     audioRef.current.currentTime = x;
     setCurrentTime(x);
@@ -65,123 +62,77 @@ function App() {
       audioRef.current.play();
     }
   };
-  
-  const handlePre = () => {
-    setAudioIndex((audioIndex - 1) % total);
-  }
-  const handleNext = () => {
-    setAudioIndex((audioIndex + 1) % total);
-  }
- 
- 
-  
-  const min_duration = duration / 60;
-  const min_current = currentTime / 60;
-  //console.log(duration,currentTime);
 
-  /**
-   * Tự chuyển bài
-   */
-  const AutoNext = () => {
-    
-    setAudioIndex((audioIndex + 1) % total);
-    setPlay(true);
-   
-    
-  }
-
-
-   const listItems = audios.map((row,index) => 
-        <AudioItem key={index.toString()} isPlay={isPlay && audioIndex === index} id={index+1} src={row.src} cover={row.cover} name={row.title}  artist={row.artist} time={row.time} handle={() => {
-          setAudioIndex(index);
+  /* tính toán bài tiếp theo để gán vào sự kiện onEnded khi kết thúc 1 bài */
+  const handeonEnded = ()=> {
+      /* mặc định tự chuyển bài kế tiếp */
+      if(isRepeat){
+          /* tính toán bài hát tiếp theo được chạy với mặt định là bài kế tiếp  */
+          let nextID = (audioIndex + 1) % total;
+          /* khi shuffer bật thì chạy random và khác bài hiện tại */
+          if(isShuffer){
+            const randomID = Math.floor(Math.random() * (total-1)) + 0;
+            nextID = randomID === audioIndex ? nextID : randomID;
+          }
+          console.log(nextID);
+          setAudioIndex(nextID);
           setPlay(true);
-        }} />);
+      } 
+      else {
+        /* nếu đang play ở bài cuối của danh sách */
+        if(audioIndex === total -1){
+          setAudioIndex((audioIndex + 1) % total);
+          if (isPlay) {
+            setPlay(false);
+            audioRef.current.pause();
+          }
+         
+        }
+      }
+  };
+
+
 
   return (
     <main className="App">
       <div className="main_container">
         <div className="layout_wrapper">
-            <div className="layout_left">
-              <h2 className='audios__list_title' style={{}}>TOP 10 Songs</h2>
-                  <ul className="audios__list">
-                     {listItems}
-                  </ul>
+          <div className="layout_left">
+            <h2 className="audios__list_title" style={{}}>
+              TOP 10 Songs
+            </h2>
+            <PlayList isPlay={isPlay} audioIndex={audioIndex} tracks={audios} callback={(currentIndex) => {
+              setAudioIndex(currentIndex);
+              setPlay(true);
+            }} />
+          </div>
+          <div className="layout_right">
+            <h2 className="playing_title">Now Playing</h2>
+            <div className="playing_box">
+              <div className="playing_now">
+                <audio
+                    ref={audioRef}
+                    src={audios[audioIndex].src}
+                    onLoadedData={() => {
+                      setDuration(audioRef.current.duration);
+                      if (isPlay) audioRef.current.play();
+                    }}
+                    onTimeUpdate={() =>
+                      setCurrentTime(audioRef.current.currentTime)
+                    }
+                    onEnded={handeonEnded}
+                  />
+                <CoverDisc isPlay={isPlay} audioIndex={audioIndex} tracks={audios} />
+                <AlbumInfo audioIndex={audioIndex} tracks={audios}/>
+                <SliderTime currentTime={currentTime} duration={duration} callback={handleTimeSliderChange} />
+              </div>
+              <Controls isPlay={isPlay} isRepeat={isRepeat} isShuffer={isShuffer} callback={handleControls} />
             </div>
-            <div className="layout_right">
-            <h2 className='playing_title'>Now Playing</h2>
-                <div className="playing_box">
-                    
-                    <div className="playing_now">
-                      <div className="playing_cover_wrapper">
-                          <div className={isPlay ? 'playing_cover rotate' : 'playing_cover'} style={{backgroundImage: `url(${audios[audioIndex].cover})`}}>
-                            <span className="playing_cover_disc"></span>
-                          </div>
-                          <audio
-                            ref={audioRef}
-                            src={audios[audioIndex].src}
-                            onLoadedData={handleLoadedData}
-                            onTimeUpdate={() => setCurrentTime(audioRef.current.currentTime)}
-                            onEnded={AutoNext}
-                          />
-                      </div>
-                      <div className="playing_info">
-                          <h3 className='playing_info_singname'>{audios[audioIndex].title}</h3>
-                          <p className='playing_info_artist'>{audios[audioIndex].artist}</p>
-                      </div>
-                      <div className="playing_timeline">
-                      <TimeSlider
-                            axis="x"
-                            xmax={duration}
-                            x={currentTime}
-                            onChange={handleTimeSliderChange}
-                            styles={{
-                              track: {
-                                backgroundColor: "#e3e3e3",
-                                height: "2px",
-                                width: '100%'
-                              },
-                              active: {
-                                backgroundColor: "#4834d4",
-                                height: "2px",
-                              },
-                              thumb: {
-                                marginTop: -1,
-                                width: 12,
-                                height: 12,
-                                backgroundColor: "#4834d4",
-                                borderRadius: 12,
-                              },
-                            }}
-                          />
-                          <div className="timeline_status">
-                            <span className="timeline_current">{min_current.toFixed(2)}</span>  <span className="timeline_duration">{min_duration.toFixed(2)}</span>
-                          </div>
-                      </div>
-                    </div>
-                    <div className="playing_controls">
-                       <div className="controls_shuffle" title="Shuffle">
-                          <IoIosShuffle  color='#a4b0be'/>
-                       </div>
-                       <div className="controls_pre" title="Pre" onClick={handlePre}>
-                          <IoIosSkipBackward color='#a4b0be' />
-                       </div>
-                       <div className="controls_playpause" title="Play Or Pause" onClick={handlePausePlayClick}>
-                          {isPlay ?  <IoIosPause color='#fff' /> :  <IoIosPlay color='#fff' />}
-                       </div>
-                       <div className="controls_next" title="Next" onClick={handleNext}>
-                         <IoIosSkipForward color='#a4b0be'/>
-                       </div>
-                       <div className="controls_repeat" title="Repeat">
-                          <IoIosRepeat color='#a4b0be'/>
-                       </div>
-                  </div>
-                </div>
-                
-            </div>
+          </div>
         </div>
       </div>
     </main>
   );
 }
 
-export default React.memo(App);
+export default App;

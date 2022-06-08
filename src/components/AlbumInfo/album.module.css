@@ -1,0 +1,10 @@
+
+.playing_info {
+    text-align: center;
+    margin: 20px auto;
+  }
+  .playing_info_singname {
+    font-size: 22px;
+    font-weight: 700;
+  }
+  

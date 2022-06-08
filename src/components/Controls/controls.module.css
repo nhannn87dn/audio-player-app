@@ -1,0 +1,33 @@
+
+.playing_controls {
+    display: flex;
+    justify-content: space-around;
+   
+  }
+  .playing_controls>div{
+    flex-basis: 40px;
+    display: flex;
+    height: 40px;
+    justify-content: center;
+     align-content: center;
+     float: left;
+     font-size: 20px;
+     cursor: pointer;
+     
+  }
+  .playing_controls>div>*{
+    vertical-align: middle;
+    margin-top: 10px;
+  }
+   div.controls_playpause{
+    background-color: #4834d4;
+    border-radius: 60px;
+    box-shadow: 0 0 0 5px #fff, 0 0 0 7px #f7f7f7;
+  }
+  
+  .playing_controls>div:not(.controls_playpause) svg:hover{
+    color: #4834d4 !important;
+  }
+  
+
+  

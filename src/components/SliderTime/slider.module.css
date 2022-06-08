@@ -1,0 +1,12 @@
+
+.playing_timeline {
+  padding: 0 20px;
+}
+.timeline_status {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #888;
+}
+.timeline_duration {
+  float: right;
+}
