@@ -1,14 +1,13 @@
-import React from 'react'
-import EqualizerIcon from '../EqualizerIcon';
-import LoveButton from '../LoveButton';
-import PropTypes from 'prop-types';
+import React from "react";
+import EqualizerIcon from "../EqualizerIcon";
+import LoveButton from "../LoveButton";
+import PropTypes from "prop-types";
 import styles from "./playlist.module.css";
 
 function PlayListItem({ id, cover, name, artist, time, callback, isPlay }) {
- 
   /* Callback to parent */
   const handleOnClick = () => {
-    if (callback && typeof callback === 'function') {
+    if (callback && typeof callback === "function") {
       callback();
     }
   };
@@ -21,20 +20,21 @@ function PlayListItem({ id, cover, name, artist, time, callback, isPlay }) {
       <span className={styles.audios__item_thumb}>
         <img src={cover} height={50} alt="{name}" onClick={handleOnClick} />
       </span>
-      <span className={styles.audios__item_name} onClick={handleOnClick}>
-        {name}
-      </span>
-      <span className={styles.audios__item_artist}>{artist}</span>
-      <span className={styles.audios__item_time}>{time}</span>
-      <span className={styles.audios__item_like}>
-        <LoveButton />
-      </span>
+      <div className={styles.audios__item_info}>
+        <span className={styles.audios__item_name} onClick={handleOnClick}>
+          {name}
+        </span>
+        <span className={styles.audios__item_artist}>{artist}</span>
+        <span className={styles.audios__item_time}>{time}</span>
+        <span className={styles.audios__item_like}>
+          <LoveButton />
+        </span>
+      </div>
     </li>
   );
 }
 
-function PlayList({tracks, isPlay, audioIndex, callback }){
-
+function PlayList({ tracks, isPlay, audioIndex, callback }) {
   const listItems = tracks.map((row, index) => (
     <PlayListItem
       key={index.toString()}
@@ -46,16 +46,14 @@ function PlayList({tracks, isPlay, audioIndex, callback }){
       artist={row.artist}
       time={row.time}
       callback={() => {
-        if (callback && typeof callback === 'function') {
+        if (callback && typeof callback === "function") {
           callback(index);
         }
       }}
     />
   ));
 
-  return (
-    <ul className={styles.audios__list}>{listItems}</ul>
-  )
+  return <ul className={styles.audios__list}>{listItems}</ul>;
 }
 
 PlayListItem.protoType = {
@@ -66,15 +64,13 @@ PlayListItem.protoType = {
   cover: PropTypes.string,
   artist: PropTypes.string,
   time: PropTypes.string
-}
-
+};
 
 PlayList.protoType = {
   tracks: PropTypes.array,
   isPlay: PropTypes.bool,
   audioIndex: PropTypes.number,
   callback: PropTypes.func
-}
+};
 
-
-export default PlayList
+export default PlayList;

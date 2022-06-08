@@ -1,50 +1,77 @@
-
 .audios__list {
-    list-style: none;
-  }
-  .audios__item {
-    background-color: #fff;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    padding: 10px;
-    display: flex;
-    justify-content: flex-start;
-  }
-  .audios__item span{
-    display: block;
-    align-self: center;
-    float: left;
+  list-style: none;
+}
+.audios__item {
+  background-color: #fff;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 10px;
+  display: flex;
+  justify-content: flex-start;
+}
+.audios__item span {
+  display: block;
+  align-self: center;
+  float: left;
+}
+.audios__item_id {
+  flex-basis: 5%;
+  color: #888;
+}
+.audios__item_thumb {
+  flex-basis: 10%;
+}
+.audios__item_thumb img {
+  border-radius: 5px;
+}
+.audios__item_info {
+  display: flex;
+  flex-basis: 85%;
+  flex-wrap: wrap;
+}
+.audios__item_name {
+  flex: 1;
+  cursor: pointer;
+  font-weight: 700;
+}
+.audios__item_artist {
+  flex-basis: 30%;
+  color: #888;
+  font-size: 13px;
+}
+.audios__item_time {
+  flex-basis: 10%;
+  color: #888;
+  font-size: 13px;
+}
+.audios__item_like {
+  flex-basis: 5%;
+  justify-self: end;
+}
+.audios__item_like svg {
+  cursor: pointer;
+}
+
+@media (max-width: 800px) {
+  .audios__item_name {
+    padding: 0 5px;
   }
   .audios__item_id {
-    flex-basis: 5%;
+    flex-basis: 7%;
     color: #888;
   }
-  .audios__item_thumb {
-    flex-basis: 10%;
-  }
-  .audios__item_thumb img{
-      border-radius: 5px;
-  }
+}
+
+@media (max-width: 480px) {
   .audios__item_name {
-    flex: 1;
-    cursor: pointer;
-    font-weight: 700;
+    flex-basis: 100%;
+    padding-left: 10px;
   }
   .audios__item_artist {
-    flex-basis: 30%;
-    color: #888;
-    font-size: 13px;
+    flex: 1;
+    padding-left: 10px;
   }
   .audios__item_time {
-    flex-basis: 10%;
-    color: #888;
-    font-size: 13px;
+    flex-basis: 20%;
   }
-  .audios__item_like {
-    flex-basis: 5%;
-    justify-self: end;
-  }
-  .audios__item_like svg{
-    cursor: pointer;
-  }
-  
+}
