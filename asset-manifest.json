@@ -1,22 +1,15 @@
 {
   "files": {
-    "main.css": "/audio-player-app/static/css/main.1c67ef82.css",
-    "main.js": "/audio-player-app/static/js/main.91387c69.js",
+    "main.css": "/audio-player-app/static/css/main.875e6cc0.css",
+    "main.js": "/audio-player-app/static/js/main.53728954.js",
     "static/js/787.9af76654.chunk.js": "/audio-player-app/static/js/787.9af76654.chunk.js",
-    "static/media/DeVuong.mp3": "/audio-player-app/static/media/DeVuong.eb31ad46257a14e1dce0.mp3",
-    "static/media/AnhSaoVaBauTroi.mp3": "/audio-player-app/static/media/AnhSaoVaBauTroi.e6202cd6839a3aebe84a.mp3",
-    "static/media/YeuEmHonMoiNgay.mp3": "/audio-player-app/static/media/YeuEmHonMoiNgay.9320c66cd671233b976f.mp3",
-    "static/media/TungThuong.mp3": "/audio-player-app/static/media/TungThuong.237a4f19009d4bf68468.mp3",
-    "static/media/cover.jpg": "/audio-player-app/static/media/cover.1075c96da6947c21ce55.jpg",
-    "static/media/cover-3.jpg": "/audio-player-app/static/media/cover-3.0aae875c48d0080834f3.jpg",
-    "static/media/cover-4.jpg": "/audio-player-app/static/media/cover-4.d48a752a17daf7e2bb08.jpg",
     "index.html": "/audio-player-app/index.html",
-    "main.1c67ef82.css.map": "/audio-player-app/static/css/main.1c67ef82.css.map",
-    "main.91387c69.js.map": "/audio-player-app/static/js/main.91387c69.js.map",
+    "main.875e6cc0.css.map": "/audio-player-app/static/css/main.875e6cc0.css.map",
+    "main.53728954.js.map": "/audio-player-app/static/js/main.53728954.js.map",
     "787.9af76654.chunk.js.map": "/audio-player-app/static/js/787.9af76654.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1c67ef82.css",
-    "static/js/main.91387c69.js"
+    "static/css/main.875e6cc0.css",
+    "static/js/main.53728954.js"
   ]
 }
